@@ -29,6 +29,9 @@ class ParticipateInForumTest extends TestCase
         // When the user adds a reply to the thread
         // A dia de hoy, auque no exista la ruta no lanzara una excepcion.
         // Hacemos el arreglo en "app/Exceptions/Handler.php", funcion "render".
+        // 
+        // En la leccion 8 se elimina el cambio y se añade en TestCase el codigo
+        // de Adam Watham para permitir lanzar o no excepcion.
         $reply = make('App\Reply');
         $this->post($thread->path() . '/replies', $reply->toArray());
 
