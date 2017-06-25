@@ -41,7 +41,7 @@ $factory->define(App\Thread::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Channel::class, function (Faker\Generator $faker) {
-    $name = $faker->name;
+    $name = $faker->word;
 
     return [
         'name' => $name,
