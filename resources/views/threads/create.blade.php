@@ -15,7 +15,10 @@
                             <label for="channel_id">Choose a Channel:</label>
                             <select name="channel_id" id="channel_id" class="form-control" required>
                                 <option value="">Choose One...</option>
-                                @foreach (App\Channel::all() as $channel)
+
+                                <!-- Puedo incluir una query en la plantilla. Lo cambio usando AppServiceProvider
+                                App\Channel::all() as $channel -->
+                                @foreach ($channels as $channel)
                                     <option value="{{ $channel->id }}" {{ old('channel_id') == $channel->id ? 'selected' : '' }}>
                                         {{ $channel->name }}
                                     </option>
