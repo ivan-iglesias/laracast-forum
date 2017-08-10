@@ -9,12 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ReplyTest extends TestCase
 {
 	use DatabaseMigrations;
-	
-	// php artisan make:test ReplyTest --unit
-	// 
-	// ./vendor/bin/phpunit tests/Unit/ReplyTest.php
-	// ./vendor/bin/phpunit --filter a_thread_has_a_creator
-	
+
     /** @test */
     public function it_has_an_owner()
     {

@@ -30,7 +30,7 @@ class ParticipateInForumTest extends TestCase
         $thread = create('App\Thread');
 
         // When the user adds a reply to the thread
-        // A dia de hoy, auque no exista la ruta no lanzara una excepcion.
+        // A dia de hoy, aunque no exista la ruta no lanzara una excepcion.
         // Hacemos el arreglo en "app/Exceptions/Handler.php", funcion "render".
         // 
         // En la leccion 8 se elimina el cambio y se añade en TestCase el codigo

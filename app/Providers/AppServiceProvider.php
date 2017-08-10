@@ -17,16 +17,22 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        // If we have too many shared variables, we can make a dedicate service provider with:
+        // Si tenemos muchas variables podemos crear un ServiceProvider dedicado a ello:
         // php artisan make:provider ViewServiceProvider
         
-        /* Make the channels available everywhere
+        /* channels es visible en todas las paginas.
         \View::composer('threads.create', function($view) { $view->with('channels', \App\Channel::all()); }
         \View::composer(['threads.create', 'layouts.app'], function($view) { ... }
         \View::composer('*', function($view) { ... });
-        */
+        
+        Hace lo mismo que con el *, pero a nivel de test falla por que se ejecuta antes
+        de realizar la migracion de las pruebas "use DatabaseMigrations;":
         \View::share('channels', Channel::all());
+        */
 
+        \View::composer('*', function($view) {
+            $view->with('channels', \App\Channel::all());
+        });
     }
 
     /**

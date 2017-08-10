@@ -49,3 +49,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## Test
+
+Crear pruebas nuevas:
+
+```shell
+php artisan make:test ReplyTest --unit
+```
+
+Ejecutar pruebas:
+
+```shell
+./vendor/bin/phpunit tests/Unit/ReplyTest.php
+./vendor/bin/phpunit --filter a_thread_has_a_creator
+```
+
+Crear alias para facilitar la ejecución de pruebas:
+
+```shell
+alias p="./vendor/bin/phpunit"
+alias pf="./vendor/bin/phpunit --filter "
+```

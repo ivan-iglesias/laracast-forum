@@ -9,8 +9,6 @@ class CreateThreadsTest extends TestCase
 {
 	use DatabaseMigrations;
 
-	// ./vendor/bin/phpunit --filter CreateThreadsTest
-
 	/** @test */
 	public function guest_may_not_create_threads()
 	{
