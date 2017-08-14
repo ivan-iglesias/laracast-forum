@@ -70,7 +70,15 @@ class ThreadsController extends Controller
      */
     public function show($channelId, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        // Formas de saber el numero de comentarios de un articulo.
+        // 1. return $thread->load('replies');
+        // 2. return Thread::withCount('replies')->find(51);
+        // 3. Crear la funcion getReplyCountAttribute en la clase Thread y llamar a "$thread->replies()->count()"
+        // 4. Crear un GlobalScope en la clase thread que devuelva la cuenta para todas las consultas.
+        return view('threads.show', [
+            'thread'  => $thread,
+            'replies' => $thread->replies()->paginate(20)
+        ]);
     }
 
     /**
