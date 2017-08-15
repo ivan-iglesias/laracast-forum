@@ -7,15 +7,19 @@ use Illuminate\Http\Request;
 
 class RepliesController extends Controller
 {
+    /**
+     * Create a new RepliesController instance.
+     */
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
 
     /**
-     * Persist a new reply
-     * @param  $channelId
-     * @param  Thread $thread
+     * Persist a new reply.
+     *
+     * @param  integer $channelId
+     * @param  Thread  $thread
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store($channelId, Thread $thread)
