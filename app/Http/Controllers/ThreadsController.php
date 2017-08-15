@@ -79,6 +79,8 @@ class ThreadsController extends Controller
      */
     public function show($channelId, Thread $thread)
     {
+        // return $thread->load('replies.favorites')->load('replies.owner');
+
         // Formas de saber el numero de comentarios de un articulo.
         // 1. return $thread->load('replies');
         // 2. return Thread::withCount('replies')->find(51);
