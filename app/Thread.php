@@ -12,6 +12,11 @@ class Thread extends Model
      * @var array
      */
     protected $guarded = [];
+
+    // Esto se aplica a todas las queries, si para algunas
+    // no nos interesa podria usa un global scope, para filtrar
+    // los hilos con o si el dueño.
+    protected $with = ['creator', 'channel'];
     
     /**
      * Laravel sabe automaicamente cuando ejecutarlo.
@@ -25,6 +30,14 @@ class Thread extends Model
         static::addGlobalScope('replyCount', function ($builder) {
             $builder->withCount('replies');
         });
+
+        /*
+         * App\Thread::first();
+         * App\Thread::withoutGlobalScopes()->first();
+         * static::addGlobalScope('creator', function ($builder) {
+         *    $builder->with('creator');
+         * });
+        */
     }
 
     /**
@@ -64,9 +77,13 @@ class Thread extends Model
      */
     public function replies()
     {
+        return $this->hasMany(Reply::Class);
+
+        /* Podramos usa un addGlobalScope pero usamos "protected $with = ['owner'];" en Reply.php.
         return $this->hasMany(Reply::Class)
             ->withCount('favorites')
             ->with('owner');
+        */
     }
 
     /**
