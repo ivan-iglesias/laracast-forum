@@ -31,7 +31,14 @@ class AppServiceProvider extends ServiceProvider
         */
 
         \View::composer('*', function($view) {
-            $view->with('channels', \App\Channel::all());
+            // Si no lo guardo en el cache, se ejecuta dos veces la query, como
+            // son datos que no van a variar mucho, lo almaceno en la cache. Si
+            // no esta en el cache, los recupera de la base de datos.
+            $channels = \Cache::rememberForever('channels', function() {
+                return Channel::all();
+            });
+
+            $view->with('channels', $channels);
         });
     }
 
@@ -42,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // No lo añado en config/app.php porque solo nos interesa en desarollo.
+        if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
     }
 }
