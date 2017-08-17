@@ -38,6 +38,10 @@ class Thread extends Model
          *    $builder->with('creator');
          * });
         */
+       
+       static::deleting(function($thread) {
+            $thread->replies()->delete();
+       });
     }
 
     /**

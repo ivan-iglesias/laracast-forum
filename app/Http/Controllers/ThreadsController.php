@@ -73,11 +73,11 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  integer     $channelId
+     * @param  integer     $channel
      * @param  \App\Thread $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId, Thread $thread)
+    public function show($channel, Thread $thread)
     {
         // return $thread->load('replies.favorites')->load('replies.owner');
 
@@ -118,12 +118,23 @@ class ThreadsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Thread  $thread
+     * @param  integer     $channel
+     * @param  \App\Thread $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy($channel, Thread $thread)
     {
-        //
+        // Si deseamos controlar el borrado de los comentarios a nivel
+        // de PHP y no base de datos, podemos borrar aqui los comentarios
+        // o mediante "static::deleting" en el modelo "Thread".
+        // $thread->replies()->delete();
+        $thread->delete();
+
+        if (request()->wantsJson()) {
+            return response([], 204);
+        }
+
+        return redirect('/threads');
     }
 
     /**
