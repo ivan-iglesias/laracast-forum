@@ -124,6 +124,14 @@ class ThreadsController extends Controller
      */
     public function destroy($channel, Thread $thread)
     {
+        // Lo reemplazo por ThreadPolicy, generado con el comando:
+        // php artisan make:policy ThreadPolicy --model=Thread
+        /* if ($thread->user_id != auth()->id()) {
+            abort(403, 'You do not have permission to do this.');
+        } */
+
+        $this->authorize('update', $thread);
+
         // Si deseamos controlar el borrado de los comentarios a nivel
         // de PHP y no base de datos, podemos borrar aqui los comentarios
         // o mediante "static::deleting" en el modelo "Thread".
